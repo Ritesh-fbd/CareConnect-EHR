@@ -1,0 +1,31 @@
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: ehr
+      POSTGRES_USER: ehruser
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-change-me-local}
+    volumes: ["ehr-db:/var/lib/postgresql/data"]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ehruser -d ehr"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+  backend:
+    build: ./backend
+    environment:
+      SPRING_PROFILES_ACTIVE: postgres
+      DB_USER: ehruser
+      DB_PASSWORD: ${DB_PASSWORD:-change-me-local}
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/ehr
+      JWT_SECRET: ${JWT_SECRET:-replace-this-with-a-long-random-secret-key}
+    depends_on:
+      db:
+        condition: service_healthy
+    ports: ["8080:8080"]
+  frontend:
+    build: ./frontend
+    depends_on: [backend]
+    ports: ["8081:80"]
+volumes:
+  ehr-db:
