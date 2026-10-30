@@ -4,6 +4,13 @@ A full-stack Electronic Health Record (EHR) learning prototype built with **Spri
 
 > **Project status:** Educational prototype only. Do not use real patient information or deploy this as a production healthcare system. Demo credentials are for local development only and must not be used for a public deployment.
 
+## Contributors
+
+- **Ritesh Singh**
+- **Uday**
+- **Aditya**
+- **Rudraksh**
+
 ## Contents
 
 - [Features](#features)
@@ -15,6 +22,7 @@ A full-stack Electronic Health Record (EHR) learning prototype built with **Spri
 - [API overview](#api-overview)
 - [Docker](#docker)
 - [Security notes](#security-notes)
+- [Contributing](#contributing)
 
 ## Features
 
